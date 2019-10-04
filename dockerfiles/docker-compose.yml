@@ -2,6 +2,8 @@ version: '3.7'
 services:
   solvit:
     image: elixir
+    env_file:
+      - solvit.env
     networks:
       back_net:
           ipv4_address: 192.168.10.2
