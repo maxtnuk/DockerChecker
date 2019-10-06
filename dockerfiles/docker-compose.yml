@@ -10,6 +10,9 @@ services:
     volumes:
       - "./solvit:/workspace"
     working_dir: /workspace
+    expose:
+     - "80"
+     - "443"
     command: bash
   front:
     image: nginx

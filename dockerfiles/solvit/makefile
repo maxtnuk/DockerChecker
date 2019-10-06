@@ -1,6 +1,6 @@
 BASE_DM=https://github.com/docker/machine/releases/download/v0.16.0
 
-.PHONY: install_docker, install_dm, create_dm,
+.PHONY: install_docker, install_dm, create_dm
 
 all: install_docker install_dm create_dm
 	echo "environment setting finish!!"
