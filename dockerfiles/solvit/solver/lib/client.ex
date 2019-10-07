@@ -15,7 +15,7 @@ defmodule Docker.Client do
   def process_response_body(""), do: nil
 
   def process_response_body(body) do
-    IO.puts(body)
+    # IO.puts(body)
     try do
       body
       |> Jason.decode!()

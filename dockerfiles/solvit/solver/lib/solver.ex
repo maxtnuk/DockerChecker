@@ -1,9 +1,9 @@
 defmodule Solver do
+  alias Docker.{
+    Container
+  }
   use Application
 
-  def hello do
-    :world
-  end
 
   def start(_type, _args) do
 
