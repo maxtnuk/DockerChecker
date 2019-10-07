@@ -44,8 +44,6 @@ defmodule Docker.NodeConfig do
     }
   end
 
-  def new(hostname, nil,cacertfile, certfile, keyfile), do: new(hostname,2376,cacertfile,certfile,keyfile)
-
   def set_label(%Docker.NodeConfig{} = node_config, label) do
     node_config |> Map.put(:label, label)
   end
