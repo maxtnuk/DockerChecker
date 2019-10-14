@@ -1,0 +1,18 @@
+version: '3.7'
+services:
+  basic:
+    image: n0madic/alpine-gcc:9.1.0
+    volumes:
+      - "algospace:/workspace"
+    working_dir: /workspace/alpine
+    command: make
+  space:
+    container_name: space
+    image: alpine
+    volumes:
+      - "algospace:/workspace"
+    working_dir: /workspace
+    command: /bin/sh
+volumes:
+  algospace:
+    external: true

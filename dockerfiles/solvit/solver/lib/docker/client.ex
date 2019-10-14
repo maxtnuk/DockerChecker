@@ -29,6 +29,7 @@ defmodule Docker.Client do
 
   def build_endpoint(endpoint, action \\ "/json")
   def build_endpoint(endpoint, "/" <> _action = action), do: endpoint <> action
+  def build_endpoint(endpoint, nil ), do: endpoint
   def build_endpoint(endpoint, action), do: endpoint <> "/" <> action
 
   def build_uri(endpoint, node_config) do

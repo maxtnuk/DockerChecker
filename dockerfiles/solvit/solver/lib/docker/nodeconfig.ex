@@ -1,5 +1,4 @@
 defmodule Docker.NodeConfig do
-
   @enforce_keys [:hostname, :port]
   defstruct [:hostname, :port, :ssl, :label]
 
@@ -12,14 +11,13 @@ defmodule Docker.NodeConfig do
 
   def new(hostname, port) do
     new(hostname)
-    |> Map.put(:port,port)
+    |> Map.put(:port, port)
   end
 
   def new(hostname) do
-   new()
-   |> Map.put(:hostname,hostname)
+    new()
+    |> Map.put(:hostname, hostname)
   end
-
 
   def new(hostname, port, cacertfile, certfile, keyfile) do
     %Docker.NodeConfig{
@@ -55,5 +53,4 @@ defmodule Docker.NodeConfig do
       ssl: node_config.ssl
     ]
   end
-
 end

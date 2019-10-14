@@ -25,5 +25,13 @@ create_dm:
 	--generic-ssh-key ${REMOTE_SSH_FILE} \
 	--generic-ssh-user=${REMOTE_HOST} ${REMOTE_NAME}
 
+install_dc:
+	sudo curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(shell uname -s)-$(shell uname -m) -o /usr/local/bin/docker-compose
+	sudo chmod +x /usr/local/bin/docker-compose
+
+create_volume:
+	docker volume create algospace
+	docker run -it -v algospace:/workspace --name space -w /workspace alpine
+
 rm_dm:
 	docker-machine rm ${REMOTE_NAME}

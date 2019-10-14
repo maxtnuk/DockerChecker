@@ -17,7 +17,6 @@ services:
   front:
     image: nginx
     depends_on:
-    - mongodb
     - cache
     volumes:
       - "./front:/workspace"
@@ -32,8 +31,15 @@ services:
     networks:
       back_net:
           ipv4_address: 192.168.10.5
-  mongodb:
+  db:
     image: mongo
+    container_name: solvdb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: skfrovls0306
+    ports:
+      - "27017:27017"
     networks:
       back_net:
           ipv4_address: 192.168.10.3
