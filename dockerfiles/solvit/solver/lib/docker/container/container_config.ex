@@ -1,10 +1,10 @@
 defmodule Docker.ContainerConfig do
-
   @enforce_keys [:Image]
   @derive Jason.Encoder
   defstruct [
     :Env,
     :HostConfig,
+    :Cmd,
     :Image
   ]
 
@@ -12,43 +12,54 @@ defmodule Docker.ContainerConfig do
     %Docker.ContainerConfig{
       Env: [],
       HostConfig: %{},
+      Cmd: [],
       Image: image_name
     }
   end
 
-  def add_env(%Docker.ContainerConfig{} = container_config, key, value) do
-   env =
-     Map.get(container_config, :Env)
-     |> List.insert_at(-1, key <> "=" <> value)
+  def add_cmd(%Docker.ContainerConfig{} = container_config, cmd) do
+    cmd =
+      container_config
+      |> Map.get(:Cmd)
+      |> List.insert_at(-1, cmd)
 
-   container_config
-   |> Map.put(:Env, env)
+    container
+    |> Map.put(:Cmd, cmd)
   end
 
- def add_dns_option(
-       %Docker.ContainerConfig{} = container_config,
-       dns_option
-     ) do
-   dns_options =
-     container_config
-     |> Map.get(:HostConfig, %{})
-     |> Map.get(:DnsOptions, [])
-     |> List.insert_at(-1, dns_option)
+  def add_env(%Docker.ContainerConfig{} = container_config, key, value) do
+    env =
+      Map.get(container_config, :Env)
+      |> List.insert_at(-1, key <> "=" <> value)
 
-   update_host_config(container_config, :DnsOptions, dns_options)
+    container_config
+    |> Map.put(:Env, env)
+  end
+
+  def add_dns_option(
+        %Docker.ContainerConfig{} = container_config,
+        dns_option
+      ) do
+    dns_options =
+      container_config
+      |> Map.get(:HostConfig, %{})
+      |> Map.get(:DnsOptions, [])
+      |> List.insert_at(-1, dns_option)
+
+    update_host_config(container_config, :DnsOptions, dns_options)
   end
 
   def update_host_config(
-         %Docker.ContainerConfig{} = container_config,
-         key,
-         value
-       ) do
-     host_config =
-       container_config
-       |> Map.get(:HostConfig, %{})
-       |> Map.put(key, value)
+        %Docker.ContainerConfig{} = container_config,
+        key,
+        value
+      ) do
+    host_config =
+      container_config
+      |> Map.get(:HostConfig, %{})
+      |> Map.put(key, value)
 
-     container_config
-     |> Map.put(:HostConfig, host_config)
+    container_config
+    |> Map.put(:HostConfig, host_config)
   end
 end
