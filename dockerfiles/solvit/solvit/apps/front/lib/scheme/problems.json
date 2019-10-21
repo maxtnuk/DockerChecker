@@ -1,0 +1,27 @@
+{
+  "id": "test",
+  "name": "test",
+  "content": "content",
+  "ex" :{
+    "inputs": [
+      {
+          "con_id": "asdf",
+          "con_input": ["hello"]
+      },
+      {
+          "con_id": "asd",
+          "con_input": ["asdf"]
+      }
+    ],
+    "output": [
+      {
+          "con_id": "asdfs",
+          "con_output": ["asdf"]
+      },
+      {
+          "con_id": "asdf",
+          "con_output": ["asdf"]
+      }
+    ]
+  }
+}
