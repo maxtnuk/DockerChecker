@@ -24,7 +24,8 @@ defmodule Front.MixProject do
   def application do
     [
       mod: {Front.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools],
+      applications: [:mongodb, :poolboy]
     ]
   end
 
@@ -37,6 +38,9 @@ defmodule Front.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:absinthe, "~> 1.4.0"},
+      {:mongodb, ">= 0.0.0"},
+      {:poolboy, ">= 0.0.0"},
       {:dockersolv, in_umbrella: true},
       {:phoenix, "~> 1.4.10"},
       {:phoenix_pubsub, "~> 1.1"},
