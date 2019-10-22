@@ -2,10 +2,10 @@ use Mix.Config
 
 # Configure your database
 config :front, Front.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "front_dev",
-  hostname: "localhost",
+  username: "root",
+  password: "skfrovls0306",
+  database: "front",
+  hostname: "192.168.10.3",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 

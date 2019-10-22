@@ -39,6 +39,7 @@ defmodule Front.MixProject do
   defp deps do
     [
       {:absinthe, "~> 1.4.0"},
+      {:absinthe_plug, "~> 1.4"},
       {:mongodb, ">= 0.0.0"},
       {:poolboy, ">= 0.0.0"},
       {:dockersolv, in_umbrella: true},

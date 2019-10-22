@@ -13,10 +13,16 @@ defmodule FrontWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", FrontWeb do
-    pipe_through :browser
+  scope "/" do
+    pipe_through :api
 
-    get "/", PageController, :index
+    forward "/graphiql", Absinthe.Plug.GraphiQL,
+      schema: Front.Schema,
+      interface: :simple,
+      context: %{pubsub: Front.Endpoint}
+
+    forward "/", Absinthe.Plug,
+      schema: Front.Schema
   end
 
   # Other scopes may use custom stacks.
