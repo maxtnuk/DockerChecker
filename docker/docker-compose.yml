@@ -1,0 +1,55 @@
+version: '3.7'
+services:
+  solvit:
+    image: solvit:base
+    env_file:
+      - solvit.env
+    networks:
+      back_net:
+          ipv4_address: 192.168.10.2
+    volumes:
+      - "./volume/solvit:/external_volume"
+    working_dir: /workspace
+    expose:
+     - "80"
+     - "443"
+    command: bash -c " make init && /bin/bash"
+  front:
+    image: nginx
+    depends_on:
+    - cache
+    volumes:
+      - "./docker_volume/front:/workspace"
+    working_dir: /workspace
+    networks:
+      host:
+          ipv4_address: 192.168.1.10
+      back_net:
+          ipv4_address: 192.168.10.4
+  cache:
+    image: redis
+    networks:
+      back_net:
+          ipv4_address: 192.168.10.5
+  db:
+    image: mongo
+    container_name: solvdb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: skfrovls0306
+    ports:
+      - "27017:27017"
+    networks:
+      back_net:
+          ipv4_address: 192.168.10.3
+    command: bash
+networks:
+  host:
+    external: true
+  back_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+          - subnet: 192.168.10.0/24

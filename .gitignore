@@ -1,4 +1,4 @@
-personal
-dockerfiles/solvit/user_instance.pem
-
+docker_volume
+docker/solvit/base/user_instance.pem
+~
 *.dump
