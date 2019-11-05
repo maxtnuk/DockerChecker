@@ -20,6 +20,7 @@ COPY user_instance.pem /base/user_instance.pem
 
 COPY docker-compose.yml /workspace/docker-compose.yml
 COPY run_algo.sh /workspace/run_algo.sh
+COPY eval.sh /workspace/eval.sh
 COPY makefile /workspace/makefile
 
 CMD [ "/bin/bash" ]

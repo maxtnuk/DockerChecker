@@ -19,20 +19,15 @@ defmodule Front.DataCase do
       alias Front.Repo
 
       import Ecto
-      import Ecto.Changeset
+      import Ecto.Changesetuser_queries
       import Ecto.Query
       import Front.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Front.Repo)
-
-    unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Front.Repo, {:shared, self()})
-    end
-
-    :ok
+    Mongo.delete_many(:mongo, "user", %{}, pool: DBConnection.Poolboy)
+    {:ok, []}
   end
 
   @doc """

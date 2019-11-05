@@ -2,12 +2,8 @@ defmodule Front.Resource do
   alias Front.Repo
   alias Front.Resource.User
 
-  def list_all(attr) do
-    
-  end
-
-  def get_user(user)do
-    Repo.all(User,user)
+  def user_list(attr) do
+    Repo.all(User,attr)
   end
 
   def create_user(attrs\\ %{}) do

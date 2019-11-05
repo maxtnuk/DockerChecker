@@ -40,6 +40,7 @@ defmodule Front.MixProject do
     [
       {:absinthe, "~> 1.4.0"},
       {:absinthe_plug, "~> 1.4"},
+      {:absinthe_relay, "~> 1.4.6"},
       {:mongodb, ">= 0.0.0"},
       {:poolboy, ">= 0.0.0"},
       {:dockersolv, in_umbrella: true},
@@ -53,6 +54,7 @@ defmodule Front.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
+      {:ex_machina, "~> 2.3", only: :test},
       # {:mongodb_ecto, github: "michalmuskala/mongodb_ecto"}
     ]
   end

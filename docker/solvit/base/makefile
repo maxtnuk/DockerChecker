@@ -2,10 +2,10 @@ BASE_DM=https://github.com/docker/machine/releases/download/v0.16.0
 
 .PHONY: install_docker, create_dm
 
-init : create_dm
+init : create_dm connect
 
 connect:
-	eval $(shell docker-machine env ${REMOTE_NAME} --shell ssh)
+	eval $$(docker-machine env ${REMOTE_NAME} --shell ssh)
 
 create_dm:
 	docker-machine create --driver generic \
