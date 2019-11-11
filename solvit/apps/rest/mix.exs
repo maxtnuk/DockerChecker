@@ -37,13 +37,13 @@ defmodule Rest.MixProject do
   defp deps do
     [
       {:dockersolv, in_umbrella: true },
-      {:absinthe_relay, "~> 1.4.0-rc or ~> 1.4"},
       {:absinthe, "~> 1.4.0"},
       {:phoenix, "~> 1.4.10"},
       {:phoenix_pubsub, "~> 1.1"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:neuron, "~> 4.0.0"}
     ]
   end
 end

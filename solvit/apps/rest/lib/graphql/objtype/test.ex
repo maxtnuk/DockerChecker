@@ -1,20 +1,14 @@
 defmodule Front.Schema.ObjectType.Test do
   use Absinthe.Schema.Notation
 
-  object :test_form do
-    field :ex_id, non_null(:id)
-    field :pro_id, non_null(:string)
-    field :ex_input, list_of(:example_case)
+  object :test do
+    field :user_id, non_null(:id)
+    filed :pro_id, non_null(:id)
+    field :source, list_of(:file)
   end
 
-  object :example_case do
-    field :input, list_of(:coninfo)
-    filed :output, list_of(:coninfo)
+  object :file do
+    field :type, non_null(:string)
+    field :source, non_null(:string)
   end
-
-  object :coninfo do
-    field :con_id, non_null(:id)
-    field :stdio, non_null(:string)
-  end
-
 end

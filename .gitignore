@@ -2,3 +2,4 @@ docker_volume
 docker/solvit/base/user_instance.pem
 ~
 *.dump
+.vscode

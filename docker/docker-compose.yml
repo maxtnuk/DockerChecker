@@ -15,42 +15,36 @@ services:
      - "80"
      - "443"
     command: bash -c " make init && /bin/bash"
-  front:
-    image: nginx
-    depends_on:
-    - cache
-    volumes:
-      - "./docker_volume/front:/workspace"
-    working_dir: /workspace
+  postgres:
+    image: postgres
+    restart: always
     networks:
-      host:
-          ipv4_address: 192.168.1.10
       back_net:
           ipv4_address: 192.168.10.4
-  cache:
-    image: redis
-    networks:
-      back_net:
-          ipv4_address: 192.168.10.5
-  db:
-    image: mongo
-    container_name: solvdb
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: skfrovls0306
-    ports:
-      - "27017:27017"
+    volumes:
+    - db_data:/var/lib/postgresql/data
+  graphql-engine:
+    image: hasura/graphql-engine:v1.0.0-beta.9
     networks:
       back_net:
           ipv4_address: 192.168.10.3
-    command: bash
+    ports:
+    - "8080:8080"
+    depends_on:
+    - "postgres"
+    restart: always
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:@postgres:5432/postgres
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+
 networks:
-  host:
-    external: true
   back_net:
     driver: bridge
     ipam:
       driver: default
       config:
           - subnet: 192.168.10.0/24
+volumes: 
+  db_data:
+    external: true
