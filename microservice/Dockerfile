@@ -10,7 +10,7 @@ WORKDIR /app
 ENV PORT 8080
 RUN set -ex ; \
     mix deps.get; \
-    mix phx.digest;
+    mix phx.digest; 
 
 # Rock'n'roll
 ENV PORT 8080
