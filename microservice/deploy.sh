@@ -1,8 +1,5 @@
 #!/bin/bash
-git status
-git add ./*
-git commit -m "$1"
-git push git_origin master
-docker build -t maxtnt/docker_elixir_alpine .
+docker build -t maxtnt/docker_elixir_alpine:solvit -f Dockerfile_solvit .
+docker build -t maxtnt/docker_elixir_alpine:solvit_latest . 
 docker-compose up solvit
 
