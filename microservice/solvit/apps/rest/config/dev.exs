@@ -21,6 +21,8 @@ config :rest, RestWeb.Endpoint,
     ]
   ]
 
+config :graphql :base_url "http://192.168.10.3:8080/v1/graphql"
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

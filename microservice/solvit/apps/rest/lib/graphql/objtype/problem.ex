@@ -1,4 +1,4 @@
-defmodule Front.Schema.ObjectType.Problem do
+defmodule Rest.Schema.ObjectType.Problem do
   use Absinthe.Schema.Notation
 
   object :problem do

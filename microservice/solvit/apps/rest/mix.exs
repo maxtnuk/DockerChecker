@@ -36,8 +36,10 @@ defmodule Rest.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:dockersolv, in_umbrella: true },
+      {:dockersolv, in_umbrella: true},
       {:absinthe, "~> 1.4.0"},
+      {:absinthe_phoenix, "~> 1.4"},
+      {:absinthe_plug, "~> 1.4"},
       {:phoenix, "~> 1.4.10"},
       {:phoenix_pubsub, "~> 1.1"},
       {:gettext, "~> 0.11"},
