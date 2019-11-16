@@ -26,8 +26,10 @@ defmodule Docker.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:phoenix_client, "~> 0.3"},
+      {:websocket_client, "~> 1.3"},
       {:httpoison, "~> 1.6"},
-      {:jason, "~> 1.1"}
+      {:jason, "~> 1.1"},
     ]
   end
 end

@@ -15,15 +15,17 @@ defmodule Docker.Client do
   def process_response_body(""), do: nil
 
   def process_response_body(body) do
-    # IO.puts(body)
     try do
-      body
-      |> Jason.decode!()
+      {:ok, result }=body
+      |> Jason.decode()
+      result
     rescue
       _ ->
         body
         |> String.split("\n", trim: true)
-        |> Enum.map(fn line -> Jason.decode!(line) end)
+        |> Enum.map(fn line ->
+          Jason.decode!(line)
+        end)
     end
   end
 

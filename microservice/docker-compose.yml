@@ -6,9 +6,14 @@ services:
     networks:
       back_net:
           ipv4_address: 192.168.10.2
+    ports:
+      - "4000"
     expose:
      - "80"
      - "443"
+     - "2376"
+     - "8080"
+     - "4000"
   postgres:
     image: postgres
     restart: always
@@ -18,7 +23,7 @@ services:
     volumes:
     - db_data:/var/lib/postgresql/data
   graphql_engine:
-    image: hasura/graphql-engine:v1.0.0-beta.9
+    image: hasura_solvit
     networks:
       back_net:
           ipv4_address: 192.168.10.3

@@ -32,7 +32,7 @@ defmodule Docker.Container do
           end)
 
         _ ->
-          IO.puts(response.body)
+          #IO.puts(response.body)
           raise "unable to list containers"
       end
     end)
@@ -55,11 +55,15 @@ defmodule Docker.Container do
           201 ->
             %Docker.Container{
               id: response.body["Id"],
+              image: response.body["Image"],
               node_config: node_config
             }
 
-          _ ->
-            raise "unable to create containers"
+          _ -> %{
+            message: "unable to create container",
+            container_id: name,
+            status: "err"
+          }
         end
       end
     )
@@ -79,8 +83,17 @@ defmodule Docker.Container do
       fn response ->
         # IO.puts(response.body)
         case response.status_code do
-          204 -> container
-          _ -> raise "unable to start container: " <> container.id
+          204 ->  %{
+            container_id: container.id,
+            image_name: container.image,
+            message: "success",
+            status: "ok"
+          }
+          _ -> %{
+            container_id: container.id,
+            message: "unable to start",
+            status: "err"
+          }
         end
       end
     )
@@ -121,7 +134,7 @@ defmodule Docker.Container do
     Base.base_delete(container.node_config, @containers_uri, container.id, fn response ->
       case response.status_code do
         204 -> :ok
-        _ -> raise "unable to delete container: " <> container.id
+        _ -> :err
       end
     end)
   end
