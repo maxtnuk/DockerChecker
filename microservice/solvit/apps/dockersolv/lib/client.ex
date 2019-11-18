@@ -16,22 +16,24 @@ defmodule Docker.Client do
 
   def process_response_body(body) do
     try do
-      {:ok, result }=body
-      |> Jason.decode()
+      {:ok, result} = body
+                      |> Jason.decode()
       result
     rescue
       _ ->
         body
         |> String.split("\n", trim: true)
-        |> Enum.map(fn line ->
-          Jason.decode!(line)
-        end)
+        |> Enum.map(
+             fn line ->
+               Jason.decode!(line)
+             end
+           )
     end
   end
 
   def build_endpoint(endpoint, action \\ "/json")
   def build_endpoint(endpoint, "/" <> _action = action), do: endpoint <> action
-  def build_endpoint(endpoint, nil ), do: endpoint
+  def build_endpoint(endpoint, nil), do: endpoint
   def build_endpoint(endpoint, action), do: endpoint <> "/" <> action
 
   def build_uri(endpoint, node_config) do

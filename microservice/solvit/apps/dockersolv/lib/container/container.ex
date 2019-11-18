@@ -3,7 +3,7 @@ defmodule Docker.Container do
     Base,
     NodeConfig,
     ContainerConfig
-  }
+    }
 
   @enforce_keys [:node_config, :id]
   defstruct [
@@ -24,22 +24,35 @@ defmodule Docker.Container do
   @containers_uri "/containers"
 
   def list(%NodeConfig{} = node_config, options) do
-    Base.base_get(node_config, @containers_uri, "/json", options, fn response ->
-      case response.status_code do
-        200 ->
-          Enum.map(response.body, fn container ->
-            to_container(container, node_config)
-          end)
+    Base.base_get(
+      node_config,
+      @containers_uri,
+      "/json",
+      options,
+      fn response ->
+        case response.status_code do
+          200 ->
+            Enum.map(
+              response.body,
+              fn container ->
+                to_container(container, node_config)
+              end
+            )
 
-        _ ->
-          #IO.puts(response.body)
-          raise "unable to list containers"
+          _ ->
+            #IO.puts(response.body)
+            raise "unable to list containers"
+        end
       end
-    end)
+    )
   end
 
   def list_all(%NodeConfig{} = node_config) do
-    options = [params: %{"all" => true}]
+    options = [
+      params: %{
+        "all" => true
+      }
+    ]
     list(node_config, options)
   end
 
@@ -60,10 +73,10 @@ defmodule Docker.Container do
             }
 
           _ -> %{
-            message: "unable to create container",
-            container_id: name,
-            status: "err"
-          }
+                 message: "unable to create container",
+                 container_id: name,
+                 status: "err"
+               }
         end
       end
     )
@@ -83,17 +96,17 @@ defmodule Docker.Container do
       fn response ->
         # IO.puts(response.body)
         case response.status_code do
-          204 ->  %{
-            container_id: container.id,
-            image_name: container.image,
-            message: "success",
-            status: "ok"
-          }
+          204 -> %{
+                   container_id: container.id,
+                   image_name: container.image,
+                   message: "success",
+                   status: "ok"
+                 }
           _ -> %{
-            container_id: container.id,
-            message: "unable to start",
-            status: "err"
-          }
+                 container_id: container.id,
+                 message: "unable to start",
+                 status: "err"
+               }
         end
       end
     )
@@ -131,12 +144,17 @@ defmodule Docker.Container do
   end
 
   def remove(%Docker.Container{} = container) do
-    Base.base_delete(container.node_config, @containers_uri, container.id, fn response ->
-      case response.status_code do
-        204 -> :ok
-        _ -> :err
+    Base.base_delete(
+      container.node_config,
+      @containers_uri,
+      container.id,
+      fn response ->
+        case response.status_code do
+          204 -> :ok
+          _ -> :err
+        end
       end
-    end)
+    )
   end
 
   def copy_file(%Docker.Container{} = container, base, user, p_no) do
@@ -144,9 +162,16 @@ defmodule Docker.Container do
 
     files =
       File.ls!(p_path)
-      |> Enum.map(fn x ->
-        {(p_no <> "/" <> x) |> String.to_charlist(), (p_path <> "/" <> x) |> String.to_charlist()}
-      end)
+      |> Enum.map(
+           fn x ->
+             {
+               (p_no <> "/" <> x)
+               |> String.to_charlist(),
+               (p_path <> "/" <> x)
+               |> String.to_charlist()
+             }
+           end
+         )
 
     # IO.puts(files)
     target = p_no <> ".tar"

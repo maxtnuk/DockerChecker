@@ -43,7 +43,8 @@ defmodule Docker.NodeConfig do
   end
 
   def set_label(%Docker.NodeConfig{} = node_config, label) do
-    node_config |> Map.put(:label, label)
+    node_config
+    |> Map.put(:label, label)
   end
 
   def get_options(%Docker.NodeConfig{ssl: nil} = _node_config), do: []

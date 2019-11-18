@@ -13,17 +13,18 @@ defmodule Docker.NetworkConfig do
     }
   end
 
-  def add_ipsetting(%Docker.NetworkConfig{} = network_config,ip_setting) do
+  def add_ipsetting(%Docker.NetworkConfig{} = network_config, ip_setting) do
     ip_setting =
       network_config
-      |> Map.get(:IPAM,%{})
-      |> Map.get(:Config,[])
-      |> List.insert_at(-1,ip_setting)
+      |> Map.get(:IPAM, %{})
+      |> Map.get(:Config, [])
+      |> List.insert_at(-1, ip_setting)
 
-    config =   network_config
-      |> Map.get(:IPAM,%{})
-      |> Map.put(:Config,ip_setting)
+    config = network_config
+             |> Map.get(:IPAM, %{})
+             |> Map.put(:Config, ip_setting)
 
-    network_config |> Map.put(:IPAM,config)
+    network_config
+    |> Map.put(:IPAM, config)
   end
 end

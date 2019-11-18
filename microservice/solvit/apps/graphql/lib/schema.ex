@@ -23,7 +23,7 @@ defmodule Graphql.Schema do
       resolve &Resolver.list_container/2
     end
 
-    field :remove_container, list_of(:container) do
+    field :remove_container, list_of(:delete_result) do
       arg :id, type: :string
 
       resolve &Resolver.remove_container/2

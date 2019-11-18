@@ -7,7 +7,7 @@ defmodule Docker.UserContainer do
     :dockerfile
   ]
 
-  def new(user_name,problemno,compose,dockerfile,sourcefile) do
+  def new(user_name, problemno, compose, dockerfile, sourcefile) do
     %Docker.UserContainer{
       user_name: user_name,
       compose: compose,

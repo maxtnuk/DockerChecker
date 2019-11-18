@@ -5,7 +5,7 @@ defmodule Docker.ContainerTest do
     Container,
     NodeConfig,
     Filter
-  }
+    }
 
   @node_config NodeConfig.new(
                  "https://54.180.124.55",
@@ -41,9 +41,16 @@ defmodule Docker.ContainerTest do
     filter = Filter.new("space")
     # filter |> Jason.encode!()
     # IO.puts(filter |> Jason.encode!())
-    options = [params: %{"all" => true, "filters" => filter |> Jason.encode!()}]
+    options = [
+      params: %{
+        "all" => true,
+        "filters" => filter
+                     |> Jason.encode!()
+      }
+    ]
     # IO.puts(options)
-    containers = @node_config |> Container.list(options)
+    containers = @node_config
+                 |> Container.list(options)
     # IO.puts(containers)
     # containers = Container.list(@node_config, options)
 

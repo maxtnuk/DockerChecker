@@ -10,7 +10,7 @@ defmodule SolvitWeb.Router do
   end
 
   forward "/graphiql",
-    Absinthe.Plug.GraphiQL,
-    schema: Graphql.Schema,
-    interface: :simple
+          Absinthe.Plug.GraphiQL,
+          schema: Graphql.Schema,
+          interface: :simple
 end

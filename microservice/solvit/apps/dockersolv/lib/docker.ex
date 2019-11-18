@@ -2,7 +2,7 @@ defmodule Docker.Base do
   alias Docker.{
     Client,
     NodeConfig
-  }
+    }
 
   def base_get(%NodeConfig{} = node_config, endpoint, action, options, fun) do
     options =
@@ -27,12 +27,20 @@ defmodule Docker.Base do
       |> Keyword.to_list()
       |> Keyword.merge(NodeConfig.get_options(node_config))
 
-    IO.puts(Client.build_endpoint(endpoint, action) |> Client.build_uri(node_config))
+    IO.puts(
+      Client.build_endpoint(endpoint, action)
+      |> Client.build_uri(node_config)
+    )
 
     response =
       Client.build_endpoint(endpoint, action)
       |> Client.build_uri(node_config)
-      |> Client.post!(body |> Jason.encode!(), [], options)
+      |> Client.post!(
+           body
+           |> Jason.encode!(),
+           [],
+           options
+         )
 
     fun.(response)
   end

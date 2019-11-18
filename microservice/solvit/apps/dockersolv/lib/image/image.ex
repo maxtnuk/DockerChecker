@@ -3,7 +3,7 @@ defmodule Docker.Image do
     Base,
     NodeConfig,
     ContainerConfig
-  }
+    }
 
   @enforce_keys [:node_config, :id]
   defstruct [
@@ -14,13 +14,18 @@ defmodule Docker.Image do
 
   @build_uri "/image"
 
-  def build(%NodeConfig{} = node_config,dockerfile,source) do
+  def build(%NodeConfig{} = node_config, dockerfile, source) do
     Base.base_post(
       node_config,
-      "",
       "/build",
+      "",
       source,
-      [params: %{"dockerfile" => dockerfile["source"],"t" => dockerfile["image_name"]}],
+      [
+        params: %{
+          "dockerfile" => dockerfile["source"],
+          "t" => dockerfile["image_name"]
+        }
+      ],
       fn response ->
         case response.status_code do
           200 ->

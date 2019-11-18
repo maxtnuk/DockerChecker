@@ -1,7 +1,7 @@
 defmodule Docker.ConnectConfig do
   alias Docker.{
     Container
-  }
+    }
 
   @enforce_keys [:Container]
   @derive Jason.Encoder
@@ -17,35 +17,35 @@ defmodule Docker.ConnectConfig do
     }
   end
 
-  def add_ipv4(%Docker.ConnectConfig{} = connect_config,ip_addr) do
+  def add_ipv4(%Docker.ConnectConfig{} = connect_config, ip_addr) do
     ipam_config =
       connect_config
       |> Map.get(:EndpointConfig, %{})
       |> Map.get(:IPAMConfig, %{})
       |> Map.put(:IPv4Address, ip_addr)
 
-      temp=
+    temp =
       connect_config
-        |> Map.get(:EndpointConfig,%{})
-        |> Map.put(:IPAMConfig,ipam_config)
+      |> Map.get(:EndpointConfig, %{})
+      |> Map.put(:IPAMConfig, ipam_config)
 
-      connect_config
-        |> Map.put(:EndpointConfig,temp)
+    connect_config
+    |> Map.put(:EndpointConfig, temp)
   end
 
-  def add_ipv6(%Docker.ConnectConfig{} = connect_config,ip_addr) do
+  def add_ipv6(%Docker.ConnectConfig{} = connect_config, ip_addr) do
     ipam_config =
       connect_config
       |> Map.get(:EndpointConfig, %{})
       |> Map.get(:IPAMConfig, %{})
       |> Map.put(:IPv6Address, ip_addr)
 
-    temp=
-    connect_config
-      |> Map.get(:EndpointConfig,%{})
-      |> Map.put(:IPAMConfig,ipam_config)
+    temp =
+      connect_config
+      |> Map.get(:EndpointConfig, %{})
+      |> Map.put(:IPAMConfig, ipam_config)
 
     connect_config
-      |> Map.put(:EndpointConfig,temp)
+    |> Map.put(:EndpointConfig, temp)
   end
 end

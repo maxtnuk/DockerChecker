@@ -12,19 +12,31 @@ use Mix.Config
 
 
 config :solvit_web,
-  generators: [context_app: :solvit]
+       generators: [
+         context_app: :solvit
+       ]
 
 # Configures the endpoint
-config :solvit_web, SolvitWeb.Endpoint,
-  url: [host: "localhost"],
-  secret_key_base: "VfZtzvTWCs8DWaWtu8USfDXBRl0KLwdgcE3HZjfl66iaWcsJYIrZlty816GgrYra",
-  render_errors: [view: SolvitWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: SolvitWeb.PubSub, adapter: Phoenix.PubSub.PG2]
+config :solvit_web,
+       SolvitWeb.Endpoint,
+       url: [
+         host: "localhost"
+       ],
+       secret_key_base: "VfZtzvTWCs8DWaWtu8USfDXBRl0KLwdgcE3HZjfl66iaWcsJYIrZlty816GgrYra",
+       render_errors: [
+         view: SolvitWeb.ErrorView,
+         accepts: ~w(json)
+       ],
+       pubsub: [
+         name: SolvitWeb.PubSub,
+         adapter: Phoenix.PubSub.PG2
+       ]
 
 # Configures Elixir's Logger
-config :logger, :console,
-  format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id]
+config :logger,
+       :console,
+       format: "$time $metadata[$level] $message\n",
+       metadata: [:request_id]
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason

@@ -3,3 +3,4 @@ docker/solvit/base/user_instance.pem
 ~
 *.dump
 .vscode
+.idea
